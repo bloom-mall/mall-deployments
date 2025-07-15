@@ -5,5 +5,5 @@ resources:
   - base/namespace.yaml
   - github.com/kubernetes/ingress-nginx/deploy/static/provider/cloud?ref=v1.13.0
 patches:
-  - overlays/ingress-nginx.yaml
-  - overlays/security-patches/ingress-nginx.yaml
+  - path: overlays/ingress-nginx.yaml
+  - path: overlays/security-patches/ingress-nginx.yaml
