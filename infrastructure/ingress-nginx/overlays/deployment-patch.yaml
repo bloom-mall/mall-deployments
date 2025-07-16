@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+
+spec:
+  replicas: 1 # 仅允许1个副本，否则端口冲突
+  template:
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name: controller
+          ports:
+            - name: http
+              containerPort: 80
+              hostPort: 8080
+            - name: https
+              containerPort: 443
+              hostPort: 443
+          resources:
+            limits:
+              cpu: 1
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 90Mi

@@ -5,12 +5,9 @@ resources:
   - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.13.0/deploy/static/provider/cloud/deploy.yaml
 
 patches:
-  - path: namespace-patch.yaml
-  - path: security-waf-patch.yaml
-    target:
-      name: ingress-nginx-controller
-  - path: security-ddos-patch.yaml
-    target:
-      name: ingress-nginx-controller
+  - path: overlays/namespace-patch.yaml
+  - path: overlays/service-patch.yaml
+  - path: overlays/deployment-patch.yaml
+  - path: overlays/security-patch.yaml
 
 namespace: infrastructure
