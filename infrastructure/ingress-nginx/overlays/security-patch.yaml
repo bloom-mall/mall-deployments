@@ -7,9 +7,9 @@ metadata:
 spec:
   template:
     spec:
-      securityContext:
-        runAsUser: 101 # nginx 非root用户
-        runAsNonRoot: true
+      # securityContext:
+      #   runAsUser: 101 # nginx 非root用户
+      #   runAsNonRoot: true
       containers:
         - name: controller
           securityContext:
