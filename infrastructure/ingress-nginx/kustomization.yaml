@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - github.com/kubernetes/ingress-nginx/deploy/static/provider/cloud?ref=controller-v1.13.0
+
+patches:
+  - path: namespace-patch.yaml
+  - path: security-waf-patch.yaml
+    target:
+      name: ingress-nginx-controller
+  - path: security-ddos-patch.yaml
+    target:
+      name: ingress-nginx-controller
+
+namespace: infrastructure
