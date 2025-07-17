@@ -1,25 +1,23 @@
 # 容器安全加固
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-spec:
-  template:
-    spec:
-      # securityContext:
-      #   runAsUser: 101 # nginx 非root用户
-      #   runAsNonRoot: true
-      containers:
-        - name: controller
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop: ["ALL"]
-              add: ["NET_BIND_SERVICE"] # 仅保留必要权限
-
----
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: ingress-nginx-controller
+#   namespace: ingress-nginx
+# spec:
+#   template:
+#     spec:
+#       securityContext:
+#         runAsUser: 101 # nginx 非root用户
+#         runAsNonRoot: true
+#       containers:
+#         - name: controller
+#           securityContext:
+#             allowPrivilegeEscalation: false
+#             readOnlyRootFilesystem: true
+#             capabilities:
+#               drop: ["ALL"]
+#               add: ["NET_BIND_SERVICE"] # 仅保留必要权限
 
 # DDoS 防护
 apiVersion: v1
