@@ -6,7 +6,7 @@ resources:
 
 patches:
   - path: overlays/namespace-patch.yaml
-  - path: overlays/service-patch.yaml
+  # - path: overlays/service-patch.yaml
   - path: overlays/deployment-patch.yaml
   - path: overlays/security-patch.yaml
 
