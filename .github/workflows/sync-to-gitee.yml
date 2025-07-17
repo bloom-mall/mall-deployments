@@ -14,4 +14,5 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
         with:
-          target-repo: git@gitee.com:bloom-mall/mall-deployments.git
+          source-repo: "git@github.com:bloom-mall/mall-deployments.git"
+          target-repo: "git@gitee.com:bloom-mall/mall-deployments.git"
