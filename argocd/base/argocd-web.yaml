@@ -4,6 +4,7 @@ metadata:
   name: argocd-web
   namespace: argocd
   annotations:
+    nginx.ingress.kubernetes.io/ssl-verify: "off"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: nginx
