@@ -3,33 +3,17 @@ kind: Ingress
 metadata:
   name: argocd-web
   namespace: argocd
-  # annotations:
-  # nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/24, 172.10.0.1"
-  # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-  # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-  # nginx.ingress.kubernetes.io/server-snippets: |
-  #   proxy_set_header Upgrade $http_upgrade;
-  #   proxy_set_header Connection "upgrade";
-
-  # 可选 HTTPS 重定向（若启用 TLS）
-  # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-
-  # 可选证书管理器（自动申请证书）
-  # cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: nginx
   rules:
-    - host: test.argocd.web.io # 域名
-      http:
+    - http:
         paths:
-          - path: /
+          - path: /argocd/web
             pathType: Prefix
             backend:
               service:
                 name: argocd-server
                 port:
-                  name: http
-# tls:
-#   - hosts:
-#       - cd.apps.argoproj.io # 域名
-#     secretName: argocd-secret
+                  number: 80
