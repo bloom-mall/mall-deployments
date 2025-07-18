@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
+  - base/crds.yaml
   - base/cert-manager.yaml
   - overlays/patch-priority-class.yaml
 
