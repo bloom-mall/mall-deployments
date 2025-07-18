@@ -19,3 +19,14 @@ spec:
             requests:
               cpu: 100m
               memory: 90Mi
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+
+data:
+  ssl-protocols: SSLv2
