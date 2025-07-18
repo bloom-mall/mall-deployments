@@ -3,18 +3,20 @@ kind: Ingress
 metadata:
   name: argocd-web
   namespace: argocd
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-verify: "off"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - shuailli.online
+      secretName: ingress-tls-secret
   rules:
-    - http:
+    - host: shuailli.online
+      http:
         paths:
-          - path: /argocd/web
-            pathType: Prefix
+          - path: /
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: argocd-server
                 port:
-                  number: 80
+                  name: http

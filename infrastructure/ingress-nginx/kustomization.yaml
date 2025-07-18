@@ -8,6 +8,6 @@ patches:
   - path: overlays/namespace-patch.yaml
   - path: overlays/service-patch.yaml
   - path: overlays/deploy-patch.yaml
-  - path: overlays/security-patch.yaml
+    #- path: overlays/security-patch.yaml
 
 namespace: infrastructure
