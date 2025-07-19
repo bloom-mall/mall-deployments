@@ -1,16 +1,18 @@
 # 容器安全加固
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: ingress-nginx-controller
-#   namespace: ingress-nginx
-# spec:
-#   template:
-#     spec:
-#       containers:
-#         - name: controller
-#           securityContext:
-#             readOnlyRootFilesystem: true
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+spec:
+  template:
+    spec:
+      containers:
+        - name: controller
+          securityContext:
+            readOnlyRootFilesystem: true
+
+---
 
 # DDoS 防护
 apiVersion: v1
