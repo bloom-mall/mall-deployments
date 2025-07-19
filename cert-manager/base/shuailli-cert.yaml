@@ -6,7 +6,7 @@ spec:
   secretName: shuailli-tls-secret
   issuerRef:
     name: tls-issuer
-    kind: Issuer
+    kind: ClusterIssuer
   commonName: shuailli.online
   dnsNames:
     - shuailli.online
