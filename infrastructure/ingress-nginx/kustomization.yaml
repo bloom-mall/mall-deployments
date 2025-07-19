@@ -7,6 +7,13 @@ resources:
 patches:
   - path: overlays/namespace-patch.yaml
   - path: overlays/service-patch.yaml
+  - target:
+      kind: Deployment
+      name: ingress-nginx-controller
+    patch: |-
+      - op: replace
+        path: /kind
+        value: DaemonSet
   - path: overlays/deploy-patch.yaml
     #- path: overlays/security-patch.yaml
 
