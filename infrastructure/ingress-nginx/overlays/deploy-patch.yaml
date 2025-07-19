@@ -1,17 +1,25 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: ingress-nginx-controller
   namespace: ingress-nginx
 
 spec:
-  replicas: 1 # 仅允许1个副本，否则端口冲突
   template:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-        - name: controller
+        - args:
+            - /nginx-ingress-controller
+            - --report-node-internal-ip-address=true
+            - --election-id=ingress-nginx-leader
+            - --controller-class=k8s.io/ingress-nginx
+            - --ingress-class=nginx
+            - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
+            - --validating-webhook=:8443
+            - --validating-webhook-certificate=/usr/local/certificates/cert
+            - --validating-webhook-key=/usr/local/certificates/key
           resources:
             limits:
               cpu: 1
