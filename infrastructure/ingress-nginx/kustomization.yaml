@@ -15,6 +15,7 @@ patches:
         path: /kind
         value: DaemonSet
   - path: overlays/deploy-patch.yaml
+  - path: overlays/validating-webhook-patch.yaml
     #- path: overlays/security-patch.yaml
 
 namespace: infrastructure
