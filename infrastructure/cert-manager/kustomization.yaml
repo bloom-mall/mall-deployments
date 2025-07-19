@@ -11,5 +11,3 @@ patches:
   - path: overlays/priority-class-patch.yaml
     target:
       kind: Deployment
-
-namespace: infrastructure
