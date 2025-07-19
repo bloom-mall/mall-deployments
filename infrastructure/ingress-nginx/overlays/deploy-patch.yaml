@@ -10,7 +10,8 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-        - args:
+        - name: controller
+          args:
             - /nginx-ingress-controller
             - --report-node-internal-ip-address=true
             - --election-id=ingress-nginx-leader
