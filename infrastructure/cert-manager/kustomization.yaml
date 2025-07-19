@@ -2,7 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - base/certificate.yaml
-  - base/tls-issuer.yaml
+  - base/cert-manager.yaml
+
+patches:
+  - path: overlays/namespace-patch.yaml
+  - path: overlays/priority-class-patch.yaml
+    target:
+      kind: Deployment
 
 namespace: infrastructure
