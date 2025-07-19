@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - ingress-nginx
+  - cert-manager
 
 namespace: infrastructure
