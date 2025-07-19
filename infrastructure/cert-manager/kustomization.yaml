@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - base/cert-manager.yaml
+  - base/tls-issuer.yaml
+  - base/shuailli-cert.yaml
 
 patches:
   - path: overlays/namespace-patch.yaml

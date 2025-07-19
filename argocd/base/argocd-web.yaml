@@ -8,7 +8,7 @@ spec:
   tls:
     - hosts:
         - shuailli.online
-      secretName: tls-secret
+      secretName: shuailli-tls-secret
   rules:
     - host: shuailli.online
       http:
