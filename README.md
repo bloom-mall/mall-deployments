@@ -4,5 +4,5 @@
 
 ## 说明
 
-- 根目录下的每一个目录映射ArgoCD里的一个Application, 目录名也是Application的名字
-- 根目录下的每一个目录映射K8s集群里的一个NameSpace, 目录名也是NameSpace的名字
+- 一级目录映射ArgoCD里的Application, 保持同名
+- 一级目录映射K8s集群里的Namespace, 保持同名
