@@ -7,6 +7,6 @@ spec:
   issuerRef:
     name: tls-issuer
     kind: ClusterIssuer
-  commonName: shuailli.online
   dnsNames:
     - shuailli.online
+    - www.shuailli.online
