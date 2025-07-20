@@ -11,10 +11,9 @@ spec:
   tls:
     - hosts:
         - shuailli.online
-        - www.shuailli.online
       secretName: shuailli-tls-secret
   rules:
-    - host: "www.shuailli.online"
+    - host: "shuailli.online"
       http:
         paths:
           - path: /argocd

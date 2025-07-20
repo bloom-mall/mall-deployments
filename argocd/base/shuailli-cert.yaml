@@ -9,4 +9,3 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - shuailli.online
-    - www.shuailli.online
