@@ -10,6 +10,6 @@ spec:
       name: letsencrypt
     solvers:
       - selector: {}
-        http01:
+        tlsALPN01: # 使用443端口挑战，因为80端口已关闭
           ingress:
             ingressClassName: nginx
