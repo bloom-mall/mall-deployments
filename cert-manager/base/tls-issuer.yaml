@@ -10,6 +10,6 @@ spec:
       name: letsencrypt
     solvers:
       - selector: {}
-        http01:
+        http01: # 使用80端口挑战，防火墙必须允许80端口
           ingress:
             ingressClassName: nginx
