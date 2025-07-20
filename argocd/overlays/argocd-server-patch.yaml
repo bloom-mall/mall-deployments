@@ -1,4 +1,3 @@
-# Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#kubernetesingress-nginx
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,4 +10,6 @@ spec:
         - name: argocd-server
           args:
             - /usr/local/bin/argocd-server
-            - --insecure
+            - --insecure # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#kubernetesingress-nginx
+            - --basehref #Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#ui-base-path
+            - /argocd
