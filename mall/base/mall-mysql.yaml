@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mall-mysql
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-mysql
+spec:
+  selector:
+    matchLabels:
+      app: mall-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mall-mysql
+    spec:
+      containers:
+        - name: mall-mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mall-mysql-root-pass
+                  key: password
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mall-mysql-storage
+              mountPath: /var/lib/mysql
+            - name: mall-mysql-config
+              mountPath: /etc/mysql/conf.d
+      volumes:
+        - name: mall-mysql-storage
+          persistentVolumeClaim:
+            claimName: mall-mysql-pvc
+        - name: mall-mysql-config
+          configMap:
+            name: mall-mysql-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mall-mysql-config
+data:
+  custom.cnf: |
+    [mysqld]
+    max_connections = 200
+    character-set-server = utf8mb4
+    collation-server = utf8mb4_unicode_ci
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mall-mysql-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mall-mysql-pvc
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
