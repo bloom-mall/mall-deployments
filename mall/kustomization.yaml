@@ -3,5 +3,8 @@ kind: Kustomization
 
 resources:
   - base/mall-mysql.yaml
+  - base/mall-db-client.yaml
+  - base/shuailli-cert.yaml
+  - base/mall-router.yaml
 
 namespace: mall
