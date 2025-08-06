@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mall-db-client
+  name: mysql-client
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mall-db-client
+      app: mysql-client
   template:
     metadata:
       labels:
-        app: mall-db-client
+        app: mysql-client
     spec:
       containers:
-        - name: mall-db-client
+        - name: mysql-client
           image: adminer:5.3.0
           ports:
             - containerPort: 8080
           env:
             - name: ADMINER_DEFAULT_SERVER
-              value: mall-mysql
+              value: mysql
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mall-db-client
+  name: mysql-client
 spec:
   selector:
-    app: mall-db-client
+    app: mysql-client
   ports:
     - protocol: TCP
       port: 80

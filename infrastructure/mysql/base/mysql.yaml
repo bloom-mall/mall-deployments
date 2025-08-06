@@ -1,57 +1,46 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: mall-mysql
-spec:
-  ports:
-    - port: 3306
-  selector:
-    app: mall-mysql
-  clusterIP: None
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mall-mysql
+  name: mysql
 spec:
   selector:
     matchLabels:
-      app: mall-mysql
+      app: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mall-mysql
+        app: mysql
     spec:
       containers:
-        - name: mall-mysql
+        - name: mysql
           image: mysql:8.0
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mall-mysql-root-pass
+                  name: mysql-root-pass
                   key: password
           ports:
             - containerPort: 3306
           volumeMounts:
-            - name: mall-mysql-storage
+            - name: mysql-storage
               mountPath: /var/lib/mysql
-            - name: mall-mysql-config
+            - name: mysql-config
               mountPath: /etc/mysql/conf.d
       volumes:
-        - name: mall-mysql-storage
+        - name: mysql-storage
           persistentVolumeClaim:
-            claimName: mall-mysql-pvc
-        - name: mall-mysql-config
+            claimName: mysql-pvc
+        - name: mysql-config
           configMap:
-            name: mall-mysql-config
+            name: mysql-config
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mall-mysql-config
+  name: mysql-config
 data:
   custom.cnf: |
     [mysqld]
@@ -62,7 +51,7 @@ data:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mall-mysql-pv
+  name: mysql-pv
   labels:
     type: local
 spec:
@@ -77,7 +66,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mall-mysql-pvc
+  name: mysql-pvc
 spec:
   storageClassName: manual
   accessModes:
@@ -85,3 +74,14 @@ spec:
   resources:
     requests:
       storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None

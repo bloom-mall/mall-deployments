@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mall
+  labels:
+    app.kubernetes.io/instance: mall
+    app.kubernetes.io/name: mall

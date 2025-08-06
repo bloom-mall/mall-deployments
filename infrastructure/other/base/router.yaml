@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mall-router
+  name: router
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
@@ -16,10 +16,10 @@ spec:
     - host: "shuailli.online"
       http:
         paths:
-          - path: /db-client/?(.*)
+          - path: /mysql-client/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: mall-db-client
+                name: mysql-client
                 port:
                   number: 80
