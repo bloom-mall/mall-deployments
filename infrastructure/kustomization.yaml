@@ -5,6 +5,7 @@ resources:
   - namespace.yaml
   - ingress-nginx
   - mysql
+  - nacos
   - other
 
 namespace: infrastructure

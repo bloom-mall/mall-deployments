@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - base/deploy.yaml
   - base/shuailli-cert.yaml
-  - base/router.yaml
+  - base/argocd-ingress.yaml
 
 patches:
   - path: overlays/argocd-server-patch.yaml

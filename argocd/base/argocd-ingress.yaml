@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: router
+  name: argocd-ingress
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
@@ -16,10 +16,10 @@ spec:
     - host: "shuailli.online"
       http:
         paths:
-          - path: /mysql-client/?(.*)
+          - path: /argocd/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: mysql-client
+                name: argocd-server
                 port:
                   number: 80

@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nacos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nacos
+  template:
+    metadata:
+      labels:
+        app: nacos
+    spec:
+      containers:
+        - name: nacos
+          image: nacos/nacos-server:v2.5.1
+          env:
+            - name: MODE
+              value: "standalone"
+            - name: FUNCTION_MODE
+              value: "config"
+            - name: NACOS_AUTH_ENABLE
+              value: "true"
+            - name: SPRING_DATASOURCE_PLATFORM
+              value: "mysql"
+            - name: MYSQL_SERVICE_HOST
+              value: "mysql"
+            - name: MYSQL_SERVICE_PORT
+              value: "3306"
+            - name: MYSQL_SERVICE_DB_NAME
+              value: "nacos"
+            - name: MYSQL_DATABASE_NUM
+              value: "1"
+            - name: MYSQL_SERVICE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-nacos-rw-user
+                  key: username
+            - name: MYSQL_SERVICE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-nacos-rw-user
+                  key: password
+            - name: NACOS_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: nacos-jwt-secret
+                  key: token
+            - name: NACOS_AUTH_IDENTITY_KEY
+              value: "nacos_key"
+            - name: NACOS_AUTH_IDENTITY_VALUE
+              value: "nacos_value"
+          ports:
+            - containerPort: 8848
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos-service
+spec:
+  selector:
+    app: nacos
+  ports:
+    - port: 8848
+  clusterIP: None
