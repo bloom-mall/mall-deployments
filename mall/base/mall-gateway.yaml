@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-gateway
+  template:
+    metadata:
+      labels:
+        app: mall-gateway
+    spec:
+      containers:
+        - name: mall-gateway
+          image: lishuaidev/mall-gateway:9b6b501a5b032a0eab243bed33748b2e15c5728b
+          env:
+            - name: NACOS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: nacos-connection-info
+                  key: username
+            - name: NACOS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nacos-connection-info
+                  key: password
+            - name: NACOS_NAMESPACE
+              valueFrom:
+                secretKeyRef:
+                  name: nacos-connection-info
+                  key: namespace
+          ports:
+            - containerPort: 8080
+              # livenessProbe:
+              #   httpGet:
+              #     path: /actuator/health
+              #     port: 8080
+              #     scheme: HTTP
+              #   initialDelaySeconds: 10
+              #   periodSeconds: 10
+              #   successThreshold: 1
+              #   failureThreshold: 5
+              #   timeoutSeconds: 10
+              # readinessProbe:
+              #   httpGet:
+              #     path: /actuator/health
+              #     port: 8080
+              #     scheme: HTTP
+              #   initialDelaySeconds: 10
+              #   periodSeconds: 10
+              #   successThreshold: 1
+              #   failureThreshold: 5
+              #   timeoutSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-gateway
+spec:
+  selector:
+    app: mall-gateway
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: shuailli-cert
+spec:
+  secretName: shuailli-tls-secret
+  issuerRef:
+    name: tls-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - shuailli.online
