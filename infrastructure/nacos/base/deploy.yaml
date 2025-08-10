@@ -53,6 +53,9 @@ spec:
               value: "nacos_value"
           ports:
             - containerPort: 8848
+              name: client
+            - containerPort: 9848
+              name: client-rpc
           resources:
             limits:
               cpu: 1
@@ -70,4 +73,9 @@ spec:
     app: nacos
   ports:
     - port: 8848
+      name: server
+      targetPort: 8848
+    - port: 9848
+      name: client-rpc
+      targetPort: 9848
   clusterIP: None
