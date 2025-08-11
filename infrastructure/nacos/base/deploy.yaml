@@ -20,28 +20,9 @@ spec:
               value: "standalone"
             - name: FUNCTION_MODE
               value: "config"
+            # 鉴权
             - name: NACOS_AUTH_ENABLE
               value: "true"
-            - name: SPRING_DATASOURCE_PLATFORM
-              value: "mysql"
-            - name: MYSQL_SERVICE_HOST
-              value: "mysql"
-            - name: MYSQL_SERVICE_PORT
-              value: "3306"
-            - name: MYSQL_SERVICE_DB_NAME
-              value: "nacos"
-            - name: MYSQL_DATABASE_NUM
-              value: "1"
-            - name: MYSQL_SERVICE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-nacos-rw-user
-                  key: username
-            - name: MYSQL_SERVICE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-nacos-rw-user
-                  key: password
             - name: NACOS_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -51,6 +32,13 @@ spec:
               value: "nacos_key"
             - name: NACOS_AUTH_IDENTITY_VALUE
               value: "nacos_value"
+            # 资源占用压榨
+            - name: JVM_XMS
+              value: "256m"
+            - name: JVM_XMX
+              value: "512m"
+            - name: JVM_XMN
+              value: "128m"
           ports:
             - containerPort: 8848
               name: client
@@ -58,11 +46,44 @@ spec:
               name: client-rpc
           resources:
             limits:
-              cpu: 1
-              memory: 1Gi
+              memory: 512Mi
             requests:
-              cpu: 300m
               memory: 256Mi
+          volumeMounts:
+            - name: nacos-storage
+              mountPath: /home/nacos/data
+      volumes:
+        - name: nacos-storage
+          persistentVolumeClaim:
+            claimName: nacos-pvc
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nacos-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: "/mnt/nacos"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nacos-pvc
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
