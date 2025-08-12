@@ -6,6 +6,7 @@ resources:
   - ingress-nginx
   - mysql
   - nacos
+  - github-runner
   - other
 
 namespace: infrastructure
