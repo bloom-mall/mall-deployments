@@ -50,13 +50,13 @@ spec:
                 secretKeyRef:
                   name: mysql-flyway-mall-rw-user
                   key: password
-                  # resources:
-                  #   limits:
-                  #     cpu: "1"
-                  #     memory: "512Mi"
-                  #   requests:
-                  #     cpu: "100m"
-                  #     memory: "128Mi"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "640Mi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
 ---
 apiVersion: v1
 kind: ServiceAccount
