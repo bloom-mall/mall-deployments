@@ -3,5 +3,5 @@ kind: Kustomization
 
 resources:
   - base/mysql.yaml
-  - base/mysql-client.yaml
-  - base/mysql-client-ingress.yaml
+  #- base/mysql-client.yaml 集群资源有限，故使用adminer, 但adminer缺乏DML自动补全，故停用
+  #- base/mysql-client-ingress.yaml

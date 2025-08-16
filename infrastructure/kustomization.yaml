@@ -6,7 +6,7 @@ resources:
   - ingress-nginx
   - mysql
   - nacos
-  - github-runner
+  #- github-runner #集群资源有限，停用
   - other
 
 namespace: infrastructure
