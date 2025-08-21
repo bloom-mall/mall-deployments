@@ -16,7 +16,7 @@ spec:
     - host: "shuailli.online"
       http:
         paths:
-          - path: /mall-gateway/?(.*)
+          - path: /api/?(.*)
             pathType: Prefix
             backend:
               service:
