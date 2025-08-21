@@ -14,22 +14,22 @@ spec:
     spec:
       containers:
         - name: mall-gateway
-          image: lishuaidev/mall-gateway:9b6b501a5b032a0eab243bed33748b2e15c5728b
+          image: lishuaidev/mall-gateway:be2960005c1d3b3b1b39dc96ed2c1b3d2e586471-dev
           env:
             - name: NACOS_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: nacos-connection-info
+                  name: nacos-mall-prod-rw-user
                   key: username
             - name: NACOS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: nacos-connection-info
+                  name: nacos-mall-prod-rw-user
                   key: password
             - name: NACOS_NAMESPACE
               valueFrom:
                 secretKeyRef:
-                  name: nacos-connection-info
+                  name: nacos-mall-prod-rw-user
                   key: namespace
           ports:
             - containerPort: 8080
