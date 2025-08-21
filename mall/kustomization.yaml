@@ -6,5 +6,6 @@ resources:
   - base/shuailli-cert.yaml
   - base/mall-gateway.yaml
   - base/mall-gateway-ingress.yaml
+  - base/mall-product.yaml
 
 namespace: mall

@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-product
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-product
+  template:
+    metadata:
+      labels:
+        app: mall-product
+    spec:
+      containers:
+        - name: mall-product
+          image: lishuaidev/mall-product:81c00c5cce926731bda00c800d75860ac5b1ab2f-dev
+          env:
+            - name: NACOS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: nacos-connection-info
+                  key: username
+            - name: NACOS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nacos-connection-info
+                  key: password
+            - name: NACOS_NAMESPACE
+              valueFrom:
+                secretKeyRef:
+                  name: nacos-connection-info
+                  key: namespace
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mall-mysql-rw-user
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mall-mysql-rw-user
+                  key: password
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 600
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 600
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+            timeoutSeconds: 10
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-product
+spec:
+  selector:
+    app: mall-product
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
