@@ -34,7 +34,7 @@ spec:
             - name: JVM_XMS
               value: "256m"
             - name: JVM_XMX
-              value: "512m"
+              value: "600m"
             - name: JVM_XMN
               value: "128m"
           ports:
@@ -44,7 +44,7 @@ spec:
               name: client-rpc
           resources:
             limits:
-              memory: 512Mi
+              memory: 640Mi
             requests:
               memory: 256Mi
           volumeMounts:
