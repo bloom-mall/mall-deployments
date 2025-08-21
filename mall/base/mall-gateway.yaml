@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mall-gateway
-          image: lishuaidev/mall-gateway:be2960005c1d3b3b1b39dc96ed2c1b3d2e586471-dev
+          image: lishuaidev/mall-gateway:2c20331c561a02e8a911a236f011e1b52537129f-dev
           env:
             - name: NACOS_USERNAME
               valueFrom:
@@ -53,6 +53,11 @@ spec:
             successThreshold: 1
             failureThreshold: 5
             timeoutSeconds: 10
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
