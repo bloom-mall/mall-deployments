@@ -14,22 +14,22 @@ spec:
     spec:
       containers:
         - name: mall-product
-          image: lishuaidev/mall-product:c26ed64926f8cc7438637177cb9d5b98386f43e9-dev
+          image: lishuaidev/mall-product:05aeeb49a1cc0feae90be88df1720b8ec376e983-dev
           env:
             - name: NACOS_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: nacos-connection-info
+                  name: nacos-mall-prod-rw-user
                   key: username
             - name: NACOS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: nacos-connection-info
+                  name: nacos-mall-prod-rw-user
                   key: password
             - name: NACOS_NAMESPACE
               valueFrom:
                 secretKeyRef:
-                  name: nacos-connection-info
+                  name: nacos-mall-prod-rw-user
                   key: namespace
             - name: MYSQL_USERNAME
               valueFrom:
