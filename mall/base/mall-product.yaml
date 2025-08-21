@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mall-product
-          image: lishuaidev/mall-product:81c00c5cce926731bda00c800d75860ac5b1ab2f-dev
+          image: lishuaidev/mall-product:c26ed64926f8cc7438637177cb9d5b98386f43e9-dev
           env:
             - name: NACOS_USERNAME
               valueFrom:
@@ -41,6 +41,8 @@ spec:
                 secretKeyRef:
                   name: mall-mysql-rw-user
                   key: password
+                  # - name: JDK_JAVA_OPTIONS
+                  #   value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=85.0 -Xms64M -XX:MaxMetaspaceSize=64M -Xss256k"
           ports:
             - containerPort: 8080
           livenessProbe:
@@ -48,7 +50,7 @@ spec:
               path: /actuator/health
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 600
+            initialDelaySeconds: 10
             periodSeconds: 10
             successThreshold: 1
             failureThreshold: 5
@@ -58,17 +60,15 @@ spec:
               path: /actuator/health
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 600
+            initialDelaySeconds: 10
             periodSeconds: 10
             successThreshold: 1
             failureThreshold: 5
             timeoutSeconds: 10
           resources:
             limits:
-              cpu: 200m
               memory: 512Mi
             requests:
-              cpu: 50m
               memory: 128Mi
 ---
 apiVersion: v1
