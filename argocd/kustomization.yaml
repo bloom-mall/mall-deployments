@@ -6,7 +6,7 @@ resources:
   - base/shuailli-cert.yaml
   - base/argocd-ingress.yaml
 
-patches:
-  - path: overlays/argocd-server-patch.yaml
+# patches:
+#   - path: overlays/argocd-server-patch.yaml
 
 namespace: argocd
