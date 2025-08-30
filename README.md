@@ -61,3 +61,10 @@ argocd account update-password
 ***注意***： 需要临时设置防火墙允许8080端口
 
 url: http://<控制平面节点公网IP>:8080
+
+## Argocd 应用创建顺序
+
+- cert-manager
+- infrastructure
+- argocd
+- mall
