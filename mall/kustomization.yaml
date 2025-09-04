@@ -2,12 +2,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - namespace.yaml
-  - base/shuailli-cert.yaml
-  - base/mall-gateway.yaml
-  - base/mall-gateway-ingress.yaml
-  - base/mall-product.yaml
+- namespace.yaml
+- base/shuailli-cert.yaml
+- base/mall-gateway.yaml
+- base/mall-gateway-ingress.yaml
+- base/mall-product.yaml
 
 namespace: mall
-
-# 统一镜像管理(自动)
+images:
+- name: mall-product-image-placeholder
+  newName: lishuaidev/mall-product
+  newTag: 071639ef56d95b4ac4fe9f3d4767effd1f95e7c0-dev
