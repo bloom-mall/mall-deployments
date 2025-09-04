@@ -9,3 +9,5 @@ resources:
   - base/mall-product.yaml
 
 namespace: mall
+
+# 统一镜像管理(自动)

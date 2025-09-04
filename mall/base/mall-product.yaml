@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mall-product
-          image: lishuaidev/mall-product:05aeeb49a1cc0feae90be88df1720b8ec376e983-dev
+          image: mall-product-image-placeholder
           env:
             - name: NACOS_USERNAME
               valueFrom:
