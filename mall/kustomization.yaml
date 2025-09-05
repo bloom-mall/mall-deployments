@@ -10,9 +10,9 @@ resources:
 
 namespace: mall
 images:
-- name: mall-product-image-placeholder
-  newName: lishuaidev/mall-product
-  newTag: 071639ef56d95b4ac4fe9f3d4767effd1f95e7c0-dev
 - name: mall-gateway-image-placeholder
   newName: lishuaidev/mall-gateway
   newTag: 01791cce97e905bb62f049a189094a9afd818437-dev
+- name: mall-product-image-placeholder
+  newName: lishuaidev/mall-product
+  newTag: 296bfaa6b6fa766fb4668dec4ba2a66dda709e1c-dev
