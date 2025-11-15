@@ -5,6 +5,7 @@ resources:
   - namespace.yaml
   - ingress-nginx
   - mysql
+  - redis
   - nacos
   #- github-runner #集群资源有限，停用
   - other
