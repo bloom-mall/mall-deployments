@@ -19,17 +19,17 @@ spec:
             - name: NACOS_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: nacos-mall-prod-rw-user
+                  name: nacos-public-rw-user
                   key: username
             - name: NACOS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: nacos-mall-prod-rw-user
+                  name: nacos-public-rw-user
                   key: password
             - name: NACOS_NAMESPACE
               valueFrom:
                 secretKeyRef:
-                  name: nacos-mall-prod-rw-user
+                  name: nacos-public-rw-user
                   key: namespace
             - name: MYSQL_USERNAME
               valueFrom:

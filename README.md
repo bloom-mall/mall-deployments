@@ -19,6 +19,10 @@ kubectl create namespace argocd
 
 #### 1.2 将 [deploy.yaml](argocd/base/deploy.yaml) 文件上传到 `k8s` 集群控制平面节点
 
+```bash
+scp -i <your_pem_file_path> ./argocd/base/deploy.yaml  ubuntu@your_ip:/home/ubuntu
+```
+
 #### 1.3 部署 ArgoCD 到 K8s集群
 
 ```bash
